@@ -23,7 +23,7 @@ queue *c_queue(unsigned size){
 }
 
 int is_ful(queue *que){
-    if(que->rear==que->capacity){
+    if(que->size==que->capacity){
         return 1;
     }
     else{
@@ -45,7 +45,7 @@ void enqueue(queue *que,int data){
         return;
     }
     else{
-        que->rear=(que->rear+1);
+        que->rear=(que->rear+1)%que->capacity;
         que->arr[que->rear]=data;
         que->size=que->size+1;
 
@@ -58,7 +58,7 @@ int dequeue(queue *que){
     }
     else{
         int item=que->arr[que->front];
-        que->front=que->front+1;
+        que->front=(que->front+1)%que->capacity;
         que->size--;
         return item;
     }
@@ -95,7 +95,19 @@ int main(){
     cin>>c;
     while(c!='e'){
       if(c=='i'){
-          
+        cin>>data;
+        enqueue(que,data);
       }  
+      if(c=='d'){
+          cout<<dequeue(que)<<endl;
+      }
+      if(c=='f'){
+          cout<<front(que)<<endl;
+      }
+      if(c=='r'){
+          cout<<rear(que)<<endl;
+      }
+      cin>>c;
     }
+    return 0;
 }
