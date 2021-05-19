@@ -56,7 +56,9 @@ class Solution
                 }
             }
         }
-        return a.top();
+        int z=a.top();
+        a.pop();
+        return z;
         
 
     }
