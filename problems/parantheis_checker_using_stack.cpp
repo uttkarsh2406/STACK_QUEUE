@@ -11,6 +11,18 @@ class Solution
 {
     public:
     //Function to check if brackets are balanced or not.
+    bool comp(char a,char b){
+        if(a=='{' && b=='}'){
+            return true;
+        }
+        if(a=='(' && b==')'){
+            return true;
+        }
+        if(a=='[' && b==']'){
+            return true;
+        }
+        return false;
+    }
     bool ispar(string x)
     {
         // Your code here
@@ -23,8 +35,21 @@ class Solution
                 a.push(x[i]);
             }
             else{
+                if(a.empty()|| !comp(a.top(),x[i])){
+                    return false;
+                }
+                else
+                   a.pop();
+
+
                 
             }
+        }
+        if(a.empty()){
+            return true;
+        }
+        else{
+            return false;
         }
         
     }
