@@ -139,7 +139,7 @@ node* nextRight(node *root, int k)
 
     }
     
-  return root;
+  return NULL;
 
 
 }
