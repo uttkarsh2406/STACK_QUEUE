@@ -1,6 +1,5 @@
 // { Driver Code Starts
-//Initial Template for C++
-
+// Initial Template for C++
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -23,6 +22,7 @@ Node* newNode(int val) {
     return temp;
 }
 
+vector<int> inOrder(Node* node);
 
 // Function to Build Tree
 Node* buildTree(string str) {
@@ -84,9 +84,33 @@ Node* buildTree(string str) {
     return root;
 }
 
+vector<int> postOrder(Node* root);
 
- // } Driver Code Ends
-//User function Template for C++
+int main() {
+    int t;
+    scanf("%d ", &t);
+    while (t--) {
+        string s, ch;
+
+        getline(cin, s);
+
+        Node* root = buildTree(s);
+
+        vector<int> ans;
+        ans = postOrder(root);
+
+        for (int i = 0; i < ans.size(); i++) cout << ans[i] << " ";
+
+        cout << "\n";
+
+        // cout<<"~"<<endl;
+    }
+    return 0;
+}
+// } Driver Code Ends
+
+
+// User function Template for C++
 
 /* Tree Node
 struct Node {
@@ -94,70 +118,60 @@ struct Node {
     Node* left;
     Node* right;
 };*/
-class Solution {
-public:
-    vector<int> inOrder(Node* root)
+vector<int> postOrder(Node* node) {
+    // code here
+    vector<int>a;
+    stack<Node *>sta;
+    if(!node){
+        return a;
+
+    }
+    sta.push(node);
+    Node *prev=NULL;
+    while (!sta.empty())
     {
-        //code here
-         //code here
-         vector<int>a;
-        if(root==NULL){
-            return a;
-        }
-        stack<Node *>sta;
-        Node *curr=root;
-        while (!sta.empty() || curr!=NULL)
-        {
-            /* code */
-            while (curr!=NULL)
+        /* code */
+        Node *curr=sta.top();
+
+        if(!prev || prev->left==curr || prev->right==curr){
+            if(curr->left){
+                sta.push(curr->left);
+            }
+            else if (curr->right)
             {
                 /* code */
-                
-                    sta.push(curr);
-                    curr=curr->left;
-            }    
-                curr=sta.top();
+                sta.push(curr->right);
+            }
+            else{
                 sta.pop();
                 a.push_back(curr->data);
-                curr=curr->right;
-
-                
-                
-            
+            }
             
         }
-        return a;
+        else if (curr->left==prev)
+        {
+            /* code */
+            if(curr->right){
+                sta.push(curr->right);
+            }
+            else{
+                sta.pop();
+                a.push_back(curr->data);
+            }
+        }
+        else if (curr->right==prev)
+        {
+            /* code */
+            sta.pop();
+            a.push_back(curr->data);
+        }
+        prev=curr;
+        
         
     }
-};
+    
+    
+    return a;
+    
 
-// { Driver Code Starts.
-
-/* Driver program to test size function*/
-
-  
-
-int main() {
-
-   
-    int t;
-    scanf("%d ", &t);
-    while (t--) {
-        string s, ch;
-        getline(cin, s);
-        
-        Node* root = buildTree(s);
-
-        vector<int> ans;
-        Solution ob;
-        ans = ob.inOrder(root) ;
-
-        for (int i = 0; i < ans.size(); i++)
-            cout << ans[i] << " ";
-
-        cout << endl;
-     
-    }
-    return 0;
 }
-  // } Driver Code Ends
