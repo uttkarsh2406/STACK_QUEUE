@@ -99,7 +99,8 @@ public:
     vector<int> inOrder(Node* root)
     {
         //code here
-        vector<int>a;
+         //code here
+         vector<int>a;
         if(root==NULL){
             return a;
         }
@@ -111,12 +112,10 @@ public:
             while (curr!=NULL)
             {
                 /* code */
-                while (curr!=NULL)
-                {
-                    /* code */
+                
                     sta.push(curr);
                     curr=curr->left;
-                }
+            }    
                 curr=sta.top();
                 sta.pop();
                 a.push_back(curr->data);
@@ -124,10 +123,10 @@ public:
 
                 
                 
-            }
+            
             
         }
-        
+        return a;
         
     }
 };
