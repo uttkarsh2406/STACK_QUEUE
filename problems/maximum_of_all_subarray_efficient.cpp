@@ -13,55 +13,39 @@ class Solution
     vector <int> max_of_subarrays(int *arr, int n, int k)
     {
         // your code here
-        deque<int>q;
         vector<int>a;
-        deque<int>b;
-        
-        for (int i = 0; i < n; i++)
+        deque<int>q;
+        int i=0;
+        for (i = 0; i < k; i++)
         {
             /* code */
-            q.push_back(arr[i]);
-        }
-        int sum=0;
-         
-            
-        while (!q.empty())
-        {
-        
-            sum=INT_MIN;
-            int i=k;
-
-            while (i--)
-            {
-                if(q.front()>sum){
-                    sum=q.front();
-                }
-                
-                
-                q.pop_front();
-               
-                b.push_back(q.front());
-
-            }
-            a.push_back(sum);
-            
-           
-            b.pop_back();
-            
-            while (!b.empty())
+            while (!q.empty() && (arr[i]>=arr[q.back()]))
             {
                 /* code */
-                q.push_front(b.back());
-                b.pop_back();
+                q.pop_back();
+
             }
-             if(q.size()<k){
-                break;
-            }
+            q.push_back(i);
             
 
         }
-        return a;
+        for (; i < n; i++)
+        {
+            /* code */
+            a.push_back(arr[q.front()]);
+            while (!q.empty() && (q.front()<=i-k))
+            {
+                /* code */
+                q.pop_front();
+            }
+            q.push_back(i);
+            
+        }
+        a.push_back(arr[q.front()]);
+        q.pop_front();
         
+
+        return a;
         
     }
 };
