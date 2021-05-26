@@ -35,7 +35,7 @@ public:
                      v.push_back(sta.top());
 
                  }
-                 sta.push(a[i]);
+                 sta.push(a[i]) ;
                  
             }
         
