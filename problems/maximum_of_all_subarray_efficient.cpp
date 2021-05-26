@@ -38,6 +38,12 @@ class Solution
                 /* code */
                 q.pop_front();
             }
+            while (!q.empty() && (arr[i]>=arr[q.back()]))
+            {
+                /* code */
+                q.pop_back();
+            }
+            
             q.push_back(i);
             
         }
